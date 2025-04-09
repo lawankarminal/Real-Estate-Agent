@@ -1,55 +1,59 @@
-const agentsData = [
-    {
-      id: 1,
-      name: "John Doe",
-      location: "New York, NY",
-      rating: 4.5,
-      operatingAreas: "Brooklyn, Manhattan, Queens",
-      about: "Experienced real estate agent specializing in luxury properties.",
-      image: "path/to/image1.jpg",
-      
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      location: "Los Angeles, CA",
-      rating: 4.8,
-      operatingAreas: "Beverly Hills, Santa Monica, Downtown LA",
-      about: "Dedicated agent with expertise in high-end real estate.",
-      image: "path/to/image2.jpg",
-      
-    },
-    {
-      id: 3,
-      name: "Michael Johnson",
-      location: "Chicago, IL",
-      rating: 4.6,
-      operatingAreas: "Downtown, Lincoln Park, Hyde Park",
-      about: "Expert in commercial and residential properties with years of experience.",
-      image: "path/to/image3.jpg",
-      
-    },
-    {
-      id: 4,
-      name: "Emily Davis",
-      location: "San Francisco, CA",
-      rating: 4.7,
-      operatingAreas: "Bay Area, Silicon Valley, Downtown SF",
-      about: "Specialist in tech-driven real estate investments and sales.",
-      image: "path/to/image4.jpg",
-      
-    },
-    {
-      id: 5,
-      name: "David Wilson",
-      location: "Miami, FL",
-      rating: 4.9,
-      operatingAreas: "Miami Beach, Coral Gables, Downtown Miami",
-      about: "Luxury real estate agent focusing on waterfront properties.",
-      image: "path/to/image5.jpg",
-      
-    }
-  ];
-  
-  export default agentsData;
-  
+const dummyAgent = [
+  {
+    id: "dummy123",
+    name: "John Doe",
+    locality: "Mumbai, Maharashtra",
+    propertiesForSale: 12,
+    propertiesForRent: 5,
+    operatingAreas: "Andheri, Bandra, Powai",
+    about: "Experienced agent specializing in premium properties.",
+    image: null,
+  },
+  {
+    id: "dummy124",
+    name: "Priya Sharma",
+    locality: "Delhi, NCR",
+    propertiesForSale: 8,
+    propertiesForRent: 7,
+    operatingAreas: "Saket, Dwarka, Rohini",
+    about: "Helping clients find their dream homes across Delhi.",
+    image: null,
+  },
+  {
+    id: "dummy125",
+    name: "Ravi Kapoor",
+    locality: "Pune, Maharashtra",
+    propertiesForSale: 10,
+    propertiesForRent: 3,
+    operatingAreas: "Koregaon Park, Baner, Wakad",
+    about: "Focused on premium and budget-friendly apartments.",
+    image: null,
+  },
+  {
+    id: "dummy126",
+    name: "Ayesha Khan",
+    locality: "Bangalore, Karnataka",
+    propertiesForSale: 9,
+    propertiesForRent: 6,
+    operatingAreas: "Indiranagar, Whitefield, HSR Layout",
+    about: "Over 5 years of experience in luxury real estate.",
+    image: null,
+  },
+  {
+    id: "dummy127",
+    name: "Karan Mehta",
+    locality: "Ahmedabad, Gujarat",
+    propertiesForSale: 7,
+    propertiesForRent: 4,
+    operatingAreas: "Navrangpura, Satellite, SG Highway",
+    about: "Dedicated to finding the perfect space for every client.",
+    image: null,
+  },
+];
+const dummyChartData = [
+  { name: "Just started", value: 3, color: "#A1E3D8" },
+  { name: "Underconstruction", value: 4, color: "#F4C542" },
+  { name: "Ready to Move", value: 5, color: "#FF8C74" },
+];
+
+export { dummyAgent, dummyChartData };

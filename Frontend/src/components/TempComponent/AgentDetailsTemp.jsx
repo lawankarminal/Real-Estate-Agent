@@ -1,16 +1,61 @@
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import image from "../assets/image.png";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import Headers from "./Headers";
 import SmallCrumb from "./SmallCrumb";
-import { dummyAgent, dummyChartData } from "../DonotUsedata/dummyAgentData"; // <-- import your dummy data
 
 export default function AgentDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [agent, setAgent] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [chartData, setChartData] = useState([]);
 
-  const agent = dummyAgent.find((agent) => agent.id === id) || dummyAgent[0];
-  const chartData = dummyChartData;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    // Fetch agent details
+    axios
+      .get(`http://localhost:5000/api/v1/agent/${id}`)
+      .then((response) => {
+        if (response.data.success) {
+          setAgent(response.data.agent);
+        } else {
+          setError("Agent details not found");
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching agent details:", error);
+        setError("Failed to load agent details");
+        setLoading(false);
+      });
+
+    // Fetch property status data for pie chart
+    axios
+      .get(`https://estate-project-5.onrender.com/api/v1/agent/${id}/property-status`)
+      .then((response) => {
+        const statusData = response.data?.statusCounts || {};
+
+        const formattedData = [
+          { name: "Just started", value: statusData["Just started"] || 0, color: "#A1E3D8" },
+          { name: "Underconstruction", value: statusData["Under Construction"] || 0, color: "#F4C542" },
+          { name: "Ready to Move", value: statusData["Ready to move"] || 0, color: "#FF8C74" },
+        ];
+
+        setChartData(formattedData);
+      })
+      .catch((error) => {
+        console.error("Error fetching property status data:", error);
+      });
+  }, [id]);
+
+  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
+
   const totalProperties = chartData.reduce((sum, item) => sum + item.value, 0);
 
   return (
@@ -28,14 +73,14 @@ export default function AgentDetails() {
                 alt="Agent"
               />
               <div className="flex flex-col gap-1 text-center sm:text-left">
-                <h2 className="text-lg sm:text-xl text-[#252A31] font-semibold">{agent.name}</h2>
-                <p className="text-sm sm:text-lg text-[#697D95]">{agent.locality}</p>
+                <h2 className="text-lg sm:text-xl text-[#252A31] font-semibold">{agent.name || "N/A"}</h2>
+                <p className="text-sm sm:text-lg text-[#697D95]">{agent.locality || "Location not available"}</p>
                 <div>
                   <p className="text-sm font-medium text-[#697D95]">
-                    <span className="text-[#252A31]">{agent.propertiesForSale}</span> Properties for sale
+                    <span className="text-[#252A31]">{agent.propertiesForSale || 0}</span> Properties for sale
                   </p>
                   <p className="text-sm font-medium text-[#697D95]">
-                    <span className="text-[#252A31]">{agent.propertiesForRent}</span> Properties for rent
+                    <span className="text-[#252A31]">{agent.propertiesForRent || 0}</span> Properties for rent
                   </p>
                 </div>
               </div>
@@ -45,7 +90,7 @@ export default function AgentDetails() {
             <div className="mt-6">
               <h3 className="text-lg sm:text-xl font-semibold">Operating Areas :</h3>
               <p className="text-sm sm:text-lg font-medium text-[#697D95] mt-1">
-                {agent.operatingAreas}
+                {agent.operatingAreas || "Not available"}
               </p>
             </div>
 
@@ -53,7 +98,7 @@ export default function AgentDetails() {
             <div className="mt-4">
               <h3 className="font-semibold text-lg sm:text-xl">About</h3>
               <p className="text-sm sm:text-lg font-medium text-[#697D95] mt-1">
-                {agent.about}
+                {agent.about || "No description available"}
               </p>
             </div>
           </div>
