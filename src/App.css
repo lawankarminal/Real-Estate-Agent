@@ -1,0 +1,56 @@
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+.header {
+  background-color: #E8EDF1;
+}
+
+/* Adjust flexbox for responsiveness */
+@media (max-width: 1024px) {
+  .flex-container {
+    flex-direction: column;
+  }
+  .filter-section, .property-list {
+    width: 100%; /* Make sections full width on smaller screens */
+  }
+}
+
+/* Improve property card scaling */
+.property-card img {
+  width: 100%;
+  height: auto; /* Prevent stretching */
+  object-fit: cover;
+}
+
+/* Adjust text and button sizes dynamically */
+.text-responsive {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .text-responsive {
+    font-size: 16px;
+  }
+}
+@media (min-width: 1024px) {
+  .text-responsive {
+    font-size: 18px;
+  }
+}
+
+.button-responsive {
+  padding: 8px 12px;
+}
+@media (min-width: 768px) {
+  .button-responsive {
+    padding: 10px 16px;
+  }
+}
+@media (min-width: 1024px) {
+  .button-responsive {
+    padding: 12px 20px;
+  }
+}
